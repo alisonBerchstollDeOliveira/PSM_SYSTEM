@@ -2,6 +2,8 @@ package py.edu.facitec.psmsystem.transaccion;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -26,11 +28,11 @@ public class VentanaEmpeno extends VentanaGenerica{
 	private JFormattedTextField tfFechaVencimiento;
 	private JTextField tfCliente;
 	private JButton btnBuscarCliente;
-	private NumberTextField tfValorTotal;
-	private JTextPane tfObs;
+	private NumberTextField tfValorEmpeno;
+	private JTextPane tfObservacion;
 	private JTextField tfDescripcion;
 	private JTextPane tfDetalle;
-	private NumberTextField tfValorEmpeno;
+	private NumberTextField tfValorTotal;
 	private JTextField tfNumero;
 	private JTextField tfCuota;
 
@@ -57,7 +59,7 @@ public class VentanaEmpeno extends VentanaGenerica{
 		getMiToolBar().btncnEliminar.setText("Anular");
 		getPanelFormulario().setBounds(10, 81, 400, 369);
 		gettBuscador().setToolTipText("Buscar por n\u00FAmero o cliente");
-		setTitle("Formulario de empe\u00F1o");
+		setTitle("Formulario de Empe\u00F1o");
 		setBounds(100, 100, 800, 663);
 
 		setLocationRelativeTo(this);
@@ -68,59 +70,59 @@ public class VentanaEmpeno extends VentanaGenerica{
 		JLabel lblNumero = new JLabel("N\u00FAmero:");
 		lblNumero.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNumero.setBounds(18, 33, 73, 20);
+		lblNumero.setBounds(32, 33, 73, 20);
 		getPanelFormulario().add(lblNumero);
 
 		JLabel lblEstado = new JLabel("Estado:");
 		lblEstado.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblEstado.setBounds(218, 33, 73, 20);
+		lblEstado.setBounds(233, 33, 73, 20);
 		getPanelFormulario().add(lblEstado);
 
 		JLabel lblFechaDia = new JLabel("Fecha dia:");
 		lblFechaDia.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblFechaDia.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblFechaDia.setBounds(18, 86, 73, 20);
+		lblFechaDia.setBounds(32, 86, 73, 20);
 		getPanelFormulario().add(lblFechaDia);
 
 		JLabel lblVencimiento = new JLabel("Vencimiento:");
 		lblVencimiento.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblVencimiento.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblVencimiento.setBounds(198, 86, 96, 20);
+		lblVencimiento.setBounds(210, 86, 96, 20);
 		getPanelFormulario().add(lblVencimiento);
 
 		JLabel lblCliente = new JLabel("Cliente:");
 		lblCliente.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCliente.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCliente.setBounds(18, 139, 73, 20);
+		lblCliente.setBounds(32, 139, 73, 20);
 		getPanelFormulario().add(lblCliente);
 
-		JLabel lblValorTotal = new JLabel("Valor total:");
-		lblValorTotal.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblValorTotal.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblValorTotal.setBounds(10, 192, 81, 20);
-		getPanelFormulario().add(lblValorTotal);
+		JLabel lblValorEmpeno = new JLabel("Vlr. empe\u00F1o:");
+		lblValorEmpeno.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblValorEmpeno.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblValorEmpeno.setBounds(-1, 192, 106, 20);
+		getPanelFormulario().add(lblValorEmpeno);
 
 		JLabel lblCuotas = new JLabel("Cuotas:");
 		lblCuotas.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCuotas.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCuotas.setBounds(237, 192, 54, 20);
+		lblCuotas.setBounds(252, 192, 54, 20);
 		getPanelFormulario().add(lblCuotas);
 
 		JLabel lblGs = new JLabel("Gs.");
-		lblGs.setBounds(214, 200, 25, 14);
+		lblGs.setBounds(227, 200, 25, 14);
 		getPanelFormulario().add(lblGs);
 
-		JLabel lblObs = new JLabel("Obs.:");
-		lblObs.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblObs.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblObs.setBounds(37, 233, 54, 20);
-		getPanelFormulario().add(lblObs);
+		JLabel lblObservacion = new JLabel("Observaci\u00F3n:");
+		lblObservacion.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblObservacion.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblObservacion.setBounds(-1, 233, 106, 20);
+		getPanelFormulario().add(lblObservacion);
 
 		tfNumero = new JTextField();
 		tfNumero.setEditable(false);
 		tfNumero.setEnabled(false);
-		tfNumero.setBounds(101, 35, 73, 20);
+		tfNumero.setBounds(115, 35, 73, 20);
 		getPanelFormulario().add(tfNumero);
 		tfNumero.setColumns(10);
 
@@ -128,48 +130,115 @@ public class VentanaEmpeno extends VentanaGenerica{
 		cbEstado.setEnabled(false);
 		cbEstado.setModel(new DefaultComboBoxModel(new String[] {"Activo", "Vencido", "Cobrado", "Anulado"}));
 		cbEstado.setToolTipText("");
-		cbEstado.setBounds(301, 36, 74, 19);
+		cbEstado.setBounds(316, 36, 74, 19);
 		getPanelFormulario().add(cbEstado);
 
 		tfFechaRegistro = new JFormattedTextField(FechaUtil.getMascara());
+		tfFechaRegistro.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (c == e.VK_ENTER) {
+					tfFechaVencimiento.requestFocus();
+					tfFechaVencimiento.selectAll();
+				}
+			}
+		});
 		tfFechaRegistro.setEditable(false);
 		tfFechaRegistro.setEnabled(false);
-		tfFechaRegistro.setBounds(101, 86, 73, 19);
+		tfFechaRegistro.setBounds(115, 86, 73, 20);
 		getPanelFormulario().add(tfFechaRegistro);
 
 		tfFechaVencimiento = new JFormattedTextField(FechaUtil.getMascara());
+		tfFechaVencimiento.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (c == e.VK_ENTER) {
+					btnBuscarCliente.requestFocus();
+				}
+			}
+		});
 		tfFechaVencimiento.setEnabled(false);
 		tfFechaVencimiento.setEditable(false);
-		tfFechaVencimiento.setBounds(301, 88, 71, 19);
+		tfFechaVencimiento.setBounds(319, 88, 71, 20);
 		getPanelFormulario().add(tfFechaVencimiento);
 
 		tfCliente = new JTextField();
 		tfCliente.setEditable(false);
 		tfCliente.setEnabled(false);
-		tfCliente.setBounds(101, 142, 237, 18);
+		tfCliente.setBounds(115, 141, 237, 20);
 		getPanelFormulario().add(tfCliente);
 		tfCliente.setColumns(10);
 
 		btnBuscarCliente = new JButton(". . .");
 		btnBuscarCliente.setEnabled(false);
+		btnBuscarCliente.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (c == e.VK_ENTER) {
+					tfValorEmpeno.requestFocus();
+					tfValorEmpeno.selectAll();
+				}
+			}
+		});
 		btnBuscarCliente.setToolTipText("Buscar cliente");
 		btnBuscarCliente.setActionCommand("BuscarCliente");
-		btnBuscarCliente.setBounds(337, 141, 38, 20);
+		btnBuscarCliente.setBounds(352, 141, 38, 21);
 		getPanelFormulario().add(btnBuscarCliente);
 
-		tfValorTotal = new NumberTextField();
-		tfValorTotal.setEditable(false);
-		tfValorTotal.setEnabled(false);
-		tfValorTotal.setHorizontalAlignment(SwingConstants.RIGHT);
-		tfValorTotal.setBounds(101, 194, 109, 20);
-		getPanelFormulario().add(tfValorTotal);
+		tfValorEmpeno = new NumberTextField();
+		tfValorEmpeno.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (c == e.VK_ENTER) {
+					tfCuota.requestFocus();
+					tfCuota.selectAll();
+				}
+			}
+		});
+		tfValorEmpeno.setEditable(false);
+		tfValorEmpeno.setEnabled(false);
+		tfValorEmpeno.setHorizontalAlignment(SwingConstants.RIGHT);
+		tfValorEmpeno.setBounds(115, 194, 109, 20);
+		getPanelFormulario().add(tfValorEmpeno);
+		
+		tfCuota = new JTextField();
+		tfCuota.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (c == e.VK_ENTER) {
+					tfObservacion.requestFocus();
+					tfObservacion.selectAll();
+				}
+			}
+		});
+		tfCuota.setEditable(false);
+		tfCuota.setEnabled(false);
+		tfCuota.setHorizontalAlignment(SwingConstants.RIGHT);
+		tfCuota.setBounds(316, 194, 74, 20);
+		getPanelFormulario().add(tfCuota);
+		tfCuota.setColumns(10);
 
-		tfObs = new JTextPane();
-		tfObs.setEditable(false);
-		tfObs.setEnabled(false);
-		tfObs.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		tfObs.setBounds(101, 233, 272, 100);
-		getPanelFormulario().add(tfObs);
+		tfObservacion = new JTextPane();
+		tfObservacion.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (c == e.VK_TAB) {
+					tfDescripcion.requestFocus();
+					tfDescripcion.selectAll();
+				}
+			}
+		});
+		tfObservacion.setEditable(false);
+		tfObservacion.setEnabled(false);
+		tfObservacion.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tfObservacion.setBounds(118, 233, 272, 100);
+		getPanelFormulario().add(tfObservacion);
 
 		JLabel lblDatosDelProducto = new JLabel("Datos del producto");
 		lblDatosDelProducto.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -188,11 +257,11 @@ public class VentanaEmpeno extends VentanaGenerica{
 		lblDetalle.setBounds(10, 543, 102, 20);
 		getContentPane().add(lblDetalle);
 
-		JLabel lblValorEmpeno = new JLabel("Valor empe\u00F1o:");
-		lblValorEmpeno.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblValorEmpeno.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblValorEmpeno.setBounds(479, 512, 121, 20);
-		getContentPane().add(lblValorEmpeno);
+		JLabel lblValorTotal = new JLabel("Valor total:");
+		lblValorTotal.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblValorTotal.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblValorTotal.setBounds(479, 512, 102, 20);
+		getContentPane().add(lblValorTotal);
 
 		tfDescripcion = new JTextField();
 		tfDescripcion.setEditable(false);
@@ -201,27 +270,19 @@ public class VentanaEmpeno extends VentanaGenerica{
 		getContentPane().add(tfDescripcion);
 		tfDescripcion.setColumns(10);
 
-		tfValorEmpeno = new NumberTextField();
-		tfValorEmpeno.setEditable(false);
-		tfValorEmpeno.setEnabled(false);
-		tfValorEmpeno.setHorizontalAlignment(SwingConstants.RIGHT);
-		tfValorEmpeno.setBounds(610, 514, 129, 20);
-		getContentPane().add(tfValorEmpeno);
+		tfValorTotal = new NumberTextField();
+		tfValorTotal.setEditable(false);
+		tfValorTotal.setEnabled(false);
+		tfValorTotal.setHorizontalAlignment(SwingConstants.RIGHT);
+		tfValorTotal.setBounds(591, 514, 129, 20);
+		getContentPane().add(tfValorTotal);
 
 		tfDetalle = new JTextPane();
 		tfDetalle.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tfDetalle.setEnabled(false);
 		tfDetalle.setEditable(false);
 		tfDetalle.setBounds(118, 543, 463, 59);
-		tfObs.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-
-		tfCuota = new JTextField();
-		tfCuota.setEditable(false);
-		tfCuota.setEnabled(false);
-		tfCuota.setHorizontalAlignment(SwingConstants.RIGHT);
-		tfCuota.setBounds(301, 194, 74, 20);
-		getPanelFormulario().add(tfCuota);
-		tfCuota.setColumns(10);
+		tfObservacion.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		getContentPane().add(tfDetalle);
 
 	}
@@ -246,13 +307,13 @@ public class VentanaEmpeno extends VentanaGenerica{
 		return btnBuscarCliente;
 	}
 	public NumberTextField gettfValorTotal() {
-		return tfValorTotal;
+		return tfValorEmpeno;
 	}
 	public JTextField gettfCuota() {
 		return tfCuota;
 	}
 	public JTextPane gettfObs() {
-		return tfObs;
+		return tfObservacion;
 	}
 	public JTextField gettfDescripcion() {
 		return tfDescripcion;
@@ -261,6 +322,6 @@ public class VentanaEmpeno extends VentanaGenerica{
 		return tfDetalle;
 	}
 	public NumberTextField gettfValorEmpeno() {
-		return tfValorEmpeno;
+		return tfValorTotal;
 	}
 }

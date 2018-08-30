@@ -24,7 +24,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
 
 import py.edu.facitec.psmsystem.abm.VentanaCliente;
 import py.edu.facitec.psmsystem.abm.VentanaConfiguracion;
@@ -53,6 +56,7 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(GraphiteLookAndFeel.class.getName());
 					VentanaPrincipal frame = new VentanaPrincipal();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -139,11 +143,12 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 
 		JMenuItem mntmInicializacinDeDatos = new JMenuItem("Inicializaci\u00F3n de Datos");
 		mntmInicializacinDeDatos.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				int respuesta = JOptionPane.showConfirmDialog(null, "Desea restablecer datos?\nSerán eliminado permanentemente todos los datos almacenados", "Atención!!", JOptionPane.YES_NO_OPTION);
 				if (respuesta==JOptionPane.YES_OPTION) {
 					inicializarBaseDeDatos();
-					JOptionPane.showMessageDialog(null, "Base de datos restablecida");
+					JOptionPane.showMessageDialog(null, "Base de datos restablecida\nDebe reiniciar el sistema para aplicar los cambios");
 					System.exit(0);
 				}
 				else {
@@ -225,8 +230,8 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 		lblNombre.setVerticalTextPosition(SwingConstants.BOTTOM);
 		lblNombre.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblNombre.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNombre.setForeground(Color.BLACK);
-		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 33));
+		lblNombre.setForeground(Color.WHITE);
+		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 33));
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.gridheight = 2;
 		gbc_lblNombre.insets = new Insets(0, 0, 8, 0);
@@ -238,8 +243,8 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 		lblDireccion.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblDireccion.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDireccion.setVerticalTextPosition(SwingConstants.BOTTOM);
-		lblDireccion.setForeground(Color.BLACK);
-		lblDireccion.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 28));
+		lblDireccion.setForeground(Color.WHITE);
+		lblDireccion.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 28));
 		GridBagConstraints gbc_lblDireccion = new GridBagConstraints();
 		gbc_lblDireccion.anchor = GridBagConstraints.WEST;
 		gbc_lblDireccion.gridheight = 2;
@@ -249,8 +254,8 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 		jPanelConfig.add(lblDireccion, gbc_lblDireccion);
 
 		lblTelefono = new JLabel("");
-		lblTelefono.setForeground(Color.BLACK);
-		lblTelefono.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 28));
+		lblTelefono.setForeground(Color.WHITE);
+		lblTelefono.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 28));
 		GridBagConstraints gbc_lblTelefono = new GridBagConstraints();
 		gbc_lblTelefono.anchor = GridBagConstraints.WEST;
 		gbc_lblTelefono.gridheight = 2;
@@ -260,8 +265,8 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 		jPanelConfig.add(lblTelefono, gbc_lblTelefono);
 
 		lblEmail = new JLabel("");
-		lblEmail.setForeground(Color.BLACK);
-		lblEmail.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 28));
+		lblEmail.setForeground(Color.WHITE);
+		lblEmail.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 28));
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.WEST;
 		gbc_lblEmail.gridheight = 2;
@@ -335,7 +340,6 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 		VentanaProductoControlador ventanaProductoControlador = new VentanaProductoControlador(b);
 		ventanaProductoControlador.inicializarProducto();
 
-		VentanaConfiguracion c = new VentanaConfiguracion();
 		VentanaConfiguracion ventanaConfiguracion = new VentanaConfiguracion();
 		ventanaConfiguracion.inicializarConfiguracion();
 

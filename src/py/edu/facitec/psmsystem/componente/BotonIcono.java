@@ -17,7 +17,7 @@ public class BotonIcono extends JButton{
 		setPreferredSize(new Dimension(100, 100));
 		setHorizontalTextPosition(SwingConstants.CENTER);
 		setMaximumSize(new Dimension(100, 100));
-		setFont(new Font("Tahoma", Font.BOLD, 14));
+		setFont(new Font("Tahoma", Font.BOLD, 16));
 		setForeground(Color.BLACK);
 		setBackground(Color.WHITE);
 	}

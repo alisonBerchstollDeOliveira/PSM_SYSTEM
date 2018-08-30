@@ -145,9 +145,10 @@ public class VentanaEmpenoControlador implements AccionesABM, KeyListener, Actio
 		this.vEmpeno.getMiToolBar().estadoInicialToolBar(true,1);
 		this.vEmpeno.getcbEstado().setEnabled(true);
 		this.vEmpeno.getTable().setEnabled(false);
-		
-		vEmpeno.gettfNumero().setText(dao.recuperarSiguienteId()+"");
 		vEmpeno.gettfFechaRegistro().setValue(FechaUtil.convertirDateUtilAString(new Date()));
+		vEmpeno.gettfFechaRegistro().selectAll();
+
+		vEmpeno.gettfNumero().setText(dao.recuperarSiguienteId()+"");
 
 	}
 
