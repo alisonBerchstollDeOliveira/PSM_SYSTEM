@@ -163,14 +163,24 @@ public class VentanaConfiguracion extends JDialog {
 				}
 			}
 		});
+			btnActualizar.setBounds(24, 194, 97, 34);
+		getContentPane().add(btnActualizar);
 		
+	
 		tfInteres = new JTextField();
 		tfInteres.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfInteres.setBounds(179, 150, 44, 20);
+		tfInteres.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (c == e.VK_ENTER) {
+					btnActualizar.requestFocus();
+				}
+			}
+		});
 		getContentPane().add(tfInteres);
 		tfInteres.setColumns(10);
-		btnActualizar.setBounds(24, 194, 97, 34);
-		getContentPane().add(btnActualizar);
 
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -204,9 +214,10 @@ public class VentanaConfiguracion extends JDialog {
 		configuracion = new Configuracion();
 		configuracion.setId(1);
 		configuracion.setNombre(tfNombre.getText());
-		configuracion.setDireccion(tfRuc.getText());
+		configuracion.setRuc(tfRuc.getText());
 		configuracion.setTelefono(tfTelefono.getText());
 		configuracion.setEmail(tfEmail.getText());
+		configuracion.setInteres(tfInteres.getText());
 	}
 
 	private void guardar(){
@@ -276,4 +287,39 @@ public class VentanaConfiguracion extends JDialog {
 	public JTextField gettfEmail() {
 		return tfEmail;
 	}
+	public JTextField getTfNombre() {
+		return tfNombre;
+	}
+	public JTextField getTfRuc() {
+		return tfRuc;
+	}
+	public JTextField getTfTelefono() {
+		return tfTelefono;
+	}
+	public JTextField getTfEmail() {
+		return tfEmail;
+	}
+	public Configuracion getConfiguracion() {
+		return configuracion;
+	}
+	public ConfiguracionDao getDao() {
+		return dao;
+	}
+	public List<Configuracion> getConfiguraciones() {
+		return configuraciones;
+	}
+	public JButton getBtnActualizar() {
+		return btnActualizar;
+	}
+	public JTextField getTfInteres() {
+		return tfInteres;
+	}
+	public JButton getBtnCancelar() {
+		return btnCancelar;
+	}
+	public JButton getBtnBorrar() {
+		return btnBorrar;
+	}
+
+	
 }

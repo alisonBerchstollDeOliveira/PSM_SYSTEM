@@ -15,14 +15,17 @@ public class Configuracion {
 	@Column(name="conf_nombre")
 	private String nombre;
 
-	@Column(name="conf_direccion")
-	private String direccion;
+	@Column(name="conf_ruc")
+	private String ruc;
 
 	@Column(name="conf_telefono")
 	private String telefono;
 
 	@Column(name="conf_email")
 	private String email;
+	
+	@Column(name="conf_interes")
+	public String interes;
 
 
 	public Integer getId() {
@@ -38,10 +41,10 @@ public class Configuracion {
 		this.nombre = nombre;
 	}
 	public String getDireccion() {
-		return direccion;
+		return ruc;
 	}
 	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+		this.ruc = direccion;
 	}
 	public String getTelefono() {
 		return telefono;
@@ -54,6 +57,18 @@ public class Configuracion {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getRuc() {
+		return ruc;
+	}
+	public void setRuc(String ruc) {
+		this.ruc = ruc;
+	}
+	public String getInteres() {
+		return interes;
+	}
+	public void setInteres(String interes) {
+		this.interes = interes;
 	}
 
 
