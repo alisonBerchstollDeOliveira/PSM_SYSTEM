@@ -25,13 +25,16 @@ import javax.swing.SwingConstants;
 
 public class VentanaConfiguracion extends JDialog {
 	private JTextField tfNombre;
-	private JTextField tfDireccion;
+	private JTextField tfRuc;
 	private JTextField tfTelefono;
 	private JTextField tfEmail;
 	private Configuracion configuracion;
 	private ConfiguracionDao dao;
 	private List<Configuracion> configuraciones;
 	private JButton btnActualizar;
+	private JTextField tfInteres;
+	private JButton btnCancelar;
+	private JButton btnBorrar;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -56,30 +59,30 @@ public class VentanaConfiguracion extends JDialog {
 		setTitle("Configuración");
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaConfiguracion.class.getResource("/img/icono.png")));
-		setBounds(100, 100, 396, 295);
+		setBounds(100, 100, 396, 276);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(this);
 		setModal(true);
 
 		JLabel lblNombre = new JLabel("Nombre o raz\u00F3n social:");
 		lblNombre.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
-		lblNombre.setBounds(10, 20, 165, 14);
+		lblNombre.setBounds(10, 14, 165, 20);
 		getContentPane().add(lblNombre);
 
-		JLabel lblEmail = new JLabel("Email:");
+		JLabel lblEmail = new JLabel("Email                        :");
 		lblEmail.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
-		lblEmail.setBounds(10, 122, 131, 14);
+		lblEmail.setBounds(10, 116, 165, 20);
 		getContentPane().add(lblEmail);
 
-		JLabel lblTelefono = new JLabel("Tel\u00E9fono:");
+		JLabel lblTelefono = new JLabel("Tel\u00E9fono                   :");
 		lblTelefono.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
-		lblTelefono.setBounds(10, 88, 131, 14);
+		lblTelefono.setBounds(10, 82, 165, 20);
 		getContentPane().add(lblTelefono);
 
-		JLabel lblDireccion = new JLabel("R.U.C.:");
-		lblDireccion.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
-		lblDireccion.setBounds(10, 49, 131, 14);
-		getContentPane().add(lblDireccion);
+		JLabel lblRuc = new JLabel("R.U.C.                      :");
+		lblRuc.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
+		lblRuc.setBounds(10, 48, 165, 20);
+		getContentPane().add(lblRuc);
 
 		tfNombre = new JTextField();
 		tfNombre.addKeyListener(new KeyAdapter() {
@@ -87,17 +90,22 @@ public class VentanaConfiguracion extends JDialog {
 			public void keyPressed(KeyEvent e) {
 				char c = e.getKeyChar();
 				if (c == e.VK_ENTER) {
-					tfDireccion.requestFocus();
-					tfDireccion.selectAll();
+					tfRuc.requestFocus();
+					tfRuc.selectAll();
 				}
 			}
 		});
-		tfNombre.setBounds(179, 17, 181, 20);
+		
+		JLabel lblTazaInteres = new JLabel("Taza de  inter\u00E9s         :");
+		lblTazaInteres.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTazaInteres.setBounds(10, 150, 165, 20);
+		getContentPane().add(lblTazaInteres);
+		tfNombre.setBounds(179, 14, 181, 20);
 		getContentPane().add(tfNombre);
 		tfNombre.setColumns(10);
 
-		tfDireccion = new JTextField();
-		tfDireccion.addKeyListener(new KeyAdapter() {
+		tfRuc = new JTextField();
+		tfRuc.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				char c = e.getKeyChar();
@@ -107,9 +115,9 @@ public class VentanaConfiguracion extends JDialog {
 				}
 			}
 		});
-		tfDireccion.setBounds(179, 46, 181, 20);
-		getContentPane().add(tfDireccion);
-		tfDireccion.setColumns(10);
+		tfRuc.setBounds(179, 48, 181, 20);
+		getContentPane().add(tfRuc);
+		tfRuc.setColumns(10);
 
 		tfTelefono = new JTextField();
 		tfTelefono.addKeyListener(new KeyAdapter() {
@@ -122,26 +130,28 @@ public class VentanaConfiguracion extends JDialog {
 				}
 			}
 		});
-		tfTelefono.setBounds(179, 85, 181, 20);
+		tfTelefono.setBounds(179, 82, 181, 20);
 		getContentPane().add(tfTelefono);
 		tfTelefono.setColumns(10);
 
 		tfEmail = new JTextField();
 		tfEmail.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyTyped(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {
 				char c = e.getKeyChar();
 				if (c == e.VK_ENTER) {
-					btnActualizar.requestFocus();
+					tfInteres.requestFocus();
+					tfInteres.selectAll();
 				}
 			}
 		});
 		tfEmail.setText("");
-		tfEmail.setBounds(179, 119, 181, 20);
+		tfEmail.setBounds(179, 116, 181, 20);
 		getContentPane().add(tfEmail);
 		tfEmail.setColumns(10);
 
 		btnActualizar = new JButton("Actualizar");
+		btnActualizar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int respuesta = JOptionPane.showConfirmDialog(null, 
@@ -153,26 +163,38 @@ public class VentanaConfiguracion extends JDialog {
 				}
 			}
 		});
-		btnActualizar.setBounds(24, 209, 97, 34);
+		
+		tfInteres = new JTextField();
+		tfInteres.setHorizontalAlignment(SwingConstants.RIGHT);
+		tfInteres.setBounds(179, 150, 44, 20);
+		getContentPane().add(tfInteres);
+		tfInteres.setColumns(10);
+		btnActualizar.setBounds(24, 194, 97, 34);
 		getContentPane().add(btnActualizar);
 
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(266, 209, 97, 34);
+		btnCancelar.setBounds(266, 194, 97, 34);
 		getContentPane().add(btnCancelar);
 
-		JButton btnBorrar = new JButton("Borrar");
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				vaciarFormulario();
 			}
 		});
-		btnBorrar.setBounds(145, 209, 97, 34);
+		btnBorrar.setBounds(145, 194, 97, 34);
 		getContentPane().add(btnBorrar);
+		
+		JLabel label = new JLabel("%");
+		label.setBounds(226, 155, 46, 14);
+		getContentPane().add(label);
 		datosActuales();
 	}
 
@@ -182,7 +204,7 @@ public class VentanaConfiguracion extends JDialog {
 		configuracion = new Configuracion();
 		configuracion.setId(1);
 		configuracion.setNombre(tfNombre.getText());
-		configuracion.setDireccion(tfDireccion.getText());
+		configuracion.setDireccion(tfRuc.getText());
 		configuracion.setTelefono(tfTelefono.getText());
 		configuracion.setEmail(tfEmail.getText());
 	}
@@ -216,7 +238,7 @@ public class VentanaConfiguracion extends JDialog {
 		configuraciones = dao.recuperarTodo();
 		if (configuraciones.size()==0) return;
 		tfNombre.setText(configuraciones.get(0).getNombre());
-		tfDireccion.setText(configuraciones.get(0).getDireccion());
+		tfRuc.setText(configuraciones.get(0).getDireccion());
 		tfTelefono.setText(configuraciones.get(0).getTelefono());
 		tfEmail.setText(configuraciones.get(0).getEmail());
 	}
@@ -224,7 +246,7 @@ public class VentanaConfiguracion extends JDialog {
 	private void vaciarFormulario() {
 		dao = new ConfiguracionDao();
 		tfNombre.setText("");
-		tfDireccion.setText("");
+		tfRuc.setText("");
 		tfTelefono.setText("");
 		tfEmail.setText("");
 	}
@@ -246,7 +268,7 @@ public class VentanaConfiguracion extends JDialog {
 		return tfNombre;
 	}
 	public JTextField gettfDireccion() {
-		return tfDireccion;
+		return tfRuc;
 	}
 	public JTextField gettfTelefono() {
 		return tfTelefono;
