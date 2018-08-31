@@ -16,9 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
 
-import py.edu.facitec.psmsystem.abm.VentanaConfiguracion;
 import py.edu.facitec.psmsystem.componente.LoadingPanel;
-import py.edu.facitec.psmsystem.dao.ConfiguracionDao;
 import py.edu.facitec.psmsystem.util.Factory;
 
 public class Loading extends JFrame {
@@ -51,15 +49,15 @@ public class Loading extends JFrame {
 		setContentPane(contentPane);
 		setLocationRelativeTo(this);		
 		contentPane.setLayout(null);
-		
+
 		lblCargando = new JLabel("Cargando...");
 		lblCargando.setBounds(10, 251, 248, 49);
 		lblCargando.setFont(new Font("Serif", Font.PLAIN, 38));
 		lblCargando.setForeground(Color.BLACK);
 		contentPane.add(lblCargando);
-		
-	
-		lblVersion = new JLabel("v1.4");
+
+
+		lblVersion = new JLabel("v1.5");
 		lblVersion.setBounds(345, 280, 95, 20);
 		lblVersion.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblVersion.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -68,7 +66,7 @@ public class Loading extends JFrame {
 		contentPane.add(lblVersion);
 		abrir.start();
 	}
-	
+
 	Timer abrir = new Timer(500, new ActionListener() {	
 		public void actionPerformed(ActionEvent e) {
 			abrirMenu();
@@ -76,22 +74,22 @@ public class Loading extends JFrame {
 		}
 	});
 	private JLabel lblVersion;
-	
+
 	public void abrirMenu(){
 		Factory.setUp();
-//		conectarReporte();
+		//		conectarReporte();
 		VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
 		ventanaPrincipal.setVisible(true);
 		dispose();
 	}
-	
-	
-//	private void conectarReporte(){
-//		ConexionReportes<VentanaPrincipal> conexionReportes = new ConexionReportes<VentanaPrincipal>();
-//		try {
-//			conexionReportes.primeraConexion();
-//		} catch (JRException e) {
-//			e.printStackTrace();
-//		}
-//	}
+
+
+	//	private void conectarReporte(){
+	//		ConexionReportes<VentanaPrincipal> conexionReportes = new ConexionReportes<VentanaPrincipal>();
+	//		try {
+	//			conexionReportes.primeraConexion();
+	//		} catch (JRException e) {
+	//			e.printStackTrace();
+	//		}
+	//	}
 }
