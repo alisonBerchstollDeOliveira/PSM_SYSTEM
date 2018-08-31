@@ -79,6 +79,12 @@ public class Producto {
 	public Empeno getEmpeno() {
 		return empeno;
 	}
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	public void setEmpeno(Empeno empeno) {
+		this.empeno = empeno;
+	}
 	
 	
 	

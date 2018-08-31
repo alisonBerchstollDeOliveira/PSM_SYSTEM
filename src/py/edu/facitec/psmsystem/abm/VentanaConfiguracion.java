@@ -17,6 +17,7 @@ import javax.swing.UIManager;
 
 import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
 
+import py.com.cs.xnumberfield.component.NumberTextField;
 import py.edu.facitec.psmsystem.app.VentanaPrincipal;
 import py.edu.facitec.psmsystem.dao.ConfiguracionDao;
 import py.edu.facitec.psmsystem.entidad.Configuracion;
@@ -32,7 +33,7 @@ public class VentanaConfiguracion extends JDialog {
 	private ConfiguracionDao dao;
 	private List<Configuracion> configuraciones;
 	private JButton btnActualizar;
-	private JTextField tfInteres;
+	private NumberTextField tfInteres;
 	private JButton btnCancelar;
 	private JButton btnBorrar;
 
@@ -167,7 +168,7 @@ public class VentanaConfiguracion extends JDialog {
 		getContentPane().add(btnActualizar);
 		
 	
-		tfInteres = new JTextField();
+		tfInteres = new NumberTextField();
 		tfInteres.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfInteres.setBounds(179, 150, 44, 20);
 		tfInteres.addKeyListener(new KeyAdapter() {
@@ -208,7 +209,7 @@ public class VentanaConfiguracion extends JDialog {
 		datosActuales();
 	}
 
-	//-------------------------FIN DEL CONSTRUCTOR--------------------------------
+//-------------------------FIN DEL CONSTRUCTOR--------------------------------
 
 	private void cargarDatos() {
 		configuracion = new Configuracion();
@@ -217,7 +218,7 @@ public class VentanaConfiguracion extends JDialog {
 		configuracion.setRuc(tfRuc.getText());
 		configuracion.setTelefono(tfTelefono.getText());
 		configuracion.setEmail(tfEmail.getText());
-		configuracion.setInteres(tfInteres.getText());
+		configuracion.setInteres(Double.parseDouble(tfInteres.getText()));
 	}
 
 	private void guardar(){
@@ -262,7 +263,7 @@ public class VentanaConfiguracion extends JDialog {
 		tfEmail.setText("");
 	}
 
-	//-----------------------------------INICIALIZAR BASE DE DATOS-------------------------------------
+//-----------------------------------INICIALIZAR BASE DE DATOS-------------------------------------
 
 	public void inicializarConfiguracion() {
 		String tabla = "tb_configuracion";
@@ -311,7 +312,7 @@ public class VentanaConfiguracion extends JDialog {
 	public JButton getBtnActualizar() {
 		return btnActualizar;
 	}
-	public JTextField getTfInteres() {
+	public NumberTextField getTfInteres() {
 		return tfInteres;
 	}
 	public JButton getBtnCancelar() {

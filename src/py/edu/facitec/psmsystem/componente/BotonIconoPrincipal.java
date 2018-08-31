@@ -8,17 +8,17 @@ import java.awt.Font;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
 
-public class BotonIcono extends JButton{
+public class BotonIconoPrincipal extends JButton{
 	
 	private static final long serialVersionUID = -5135218231501823013L;
 
-	public BotonIcono(){
+	public BotonIconoPrincipal(){
 		setVerticalTextPosition(SwingConstants.BOTTOM);
 		setPreferredSize(new Dimension(100, 100));
 		setHorizontalTextPosition(SwingConstants.CENTER);
 		setMaximumSize(new Dimension(100, 100));
 		setFont(new Font("Tahoma", Font.BOLD, 16));
-		setForeground(Color.BLACK);
+		setForeground(Color.WHITE);
 		setBackground(Color.WHITE);
 	}
 	public void setText(String text) {
@@ -28,7 +28,7 @@ public class BotonIcono extends JButton{
 	
 	public void setIcono(String nombreIcono){
 		try {
-			URL url = BotonIcono.class.getResource("/img/"+nombreIcono.toLowerCase()+".png");
+			URL url = BotonIconoPrincipal.class.getResource("/img/"+nombreIcono.toLowerCase()+".png");
 			setIcon(new ImageIcon(url));
 			
 		} catch (Exception e) {

@@ -17,9 +17,13 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
+import org.hibernate.cfg.Configuration;
+
 import py.com.cs.xnumberfield.component.NumberTextField;
 import py.edu.facitec.psmsystem.componente.VentanaGenerica;
 import py.edu.facitec.psmsystem.controlador.VentanaEmpenoControlador;
+import py.edu.facitec.psmsystem.dao.ConfiguracionDao;
+import py.edu.facitec.psmsystem.entidad.Configuracion;
 import py.edu.facitec.psmsystem.util.FechaUtil;
 
 public class VentanaEmpeno extends VentanaGenerica{
@@ -35,7 +39,7 @@ public class VentanaEmpeno extends VentanaGenerica{
 	private NumberTextField tfValorTotal;
 	private JTextField tfNumero;
 	private JTextField tfCuota;
-
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -56,6 +60,7 @@ public class VentanaEmpeno extends VentanaGenerica{
 	}
 
 	public VentanaEmpeno() {
+		getMiToolBar().setBounds(10, 11, 400, 64);
 		getMiToolBar().btncnEliminar.setText("Anular");
 		getPanelFormulario().setBounds(10, 81, 400, 369);
 		gettBuscador().setToolTipText("Buscar por n\u00FAmero o cliente");
@@ -120,8 +125,8 @@ public class VentanaEmpeno extends VentanaGenerica{
 		getPanelFormulario().add(lblObservacion);
 
 		tfNumero = new JTextField();
+		tfNumero.setHorizontalAlignment(SwingConstants.CENTER);
 		tfNumero.setEditable(false);
-		tfNumero.setEnabled(false);
 		tfNumero.setBounds(115, 35, 73, 20);
 		getPanelFormulario().add(tfNumero);
 		tfNumero.setColumns(10);
@@ -139,8 +144,7 @@ public class VentanaEmpeno extends VentanaGenerica{
 			public void keyPressed(KeyEvent e) {
 				char c = e.getKeyChar();
 				if (c == e.VK_ENTER) {
-					tfFechaVencimiento.requestFocus();
-					tfFechaVencimiento.selectAll();
+					btnBuscarCliente.requestFocus();
 				}
 			}
 		});
@@ -150,16 +154,6 @@ public class VentanaEmpeno extends VentanaGenerica{
 		getPanelFormulario().add(tfFechaRegistro);
 
 		tfFechaVencimiento = new JFormattedTextField(FechaUtil.getMascara());
-		tfFechaVencimiento.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				char c = e.getKeyChar();
-				if (c == e.VK_ENTER) {
-					btnBuscarCliente.requestFocus();
-				}
-			}
-		});
-		tfFechaVencimiento.setEnabled(false);
 		tfFechaVencimiento.setEditable(false);
 		tfFechaVencimiento.setBounds(319, 88, 71, 20);
 		getPanelFormulario().add(tfFechaVencimiento);
@@ -213,6 +207,7 @@ public class VentanaEmpeno extends VentanaGenerica{
 				if (c == e.VK_ENTER) {
 					tfObservacion.requestFocus();
 					tfObservacion.selectAll();
+					calculos();
 				}
 			}
 		});
@@ -272,7 +267,6 @@ public class VentanaEmpeno extends VentanaGenerica{
 
 		tfValorTotal = new NumberTextField();
 		tfValorTotal.setEditable(false);
-		tfValorTotal.setEnabled(false);
 		tfValorTotal.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfValorTotal.setBounds(591, 514, 129, 20);
 		getContentPane().add(tfValorTotal);
@@ -285,6 +279,14 @@ public class VentanaEmpeno extends VentanaGenerica{
 		tfObservacion.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		getContentPane().add(tfDetalle);
 
+	}
+	
+	private void calculos() {
+		tfFechaVencimiento.setValue(FechaUtil.convertirDateUtilAString(FechaUtil.sumarMes(FechaUtil.convertirStringADateUtil(tfFechaRegistro.getText()), Integer.parseInt(tfCuota.getText()) )));
+		ConfiguracionDao dao = new ConfiguracionDao();
+		Configuracion configuracion = dao.recuperarPorId(1);
+		Double interes = ((Double.parseDouble(tfValorEmpeno.getText())*configuracion.getInteres()) / 100) * Integer.parseInt(tfCuota.getText());
+		tfValorTotal.setText((interes + Double.parseDouble(tfValorEmpeno.getText()))+"");
 	}
 
 
@@ -307,7 +309,7 @@ public class VentanaEmpeno extends VentanaGenerica{
 		return btnBuscarCliente;
 	}
 	public NumberTextField gettfValorTotal() {
-		return tfValorEmpeno;
+		return tfValorTotal;
 	}
 	public JTextField gettfCuota() {
 		return tfCuota;
@@ -322,6 +324,6 @@ public class VentanaEmpeno extends VentanaGenerica{
 		return tfDetalle;
 	}
 	public NumberTextField gettfValorEmpeno() {
-		return tfValorTotal;
+		return tfValorEmpeno;
 	}
 }

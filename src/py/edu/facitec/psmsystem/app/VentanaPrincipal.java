@@ -32,7 +32,7 @@ import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
 import py.edu.facitec.psmsystem.abm.VentanaCliente;
 import py.edu.facitec.psmsystem.abm.VentanaConfiguracion;
 import py.edu.facitec.psmsystem.abm.VentanaProducto;
-import py.edu.facitec.psmsystem.componente.BotonIcono;
+import py.edu.facitec.psmsystem.componente.BotonIconoPrincipal;
 import py.edu.facitec.psmsystem.componente.PanelFondo;
 import py.edu.facitec.psmsystem.controlador.VentanaClienteControlador;
 import py.edu.facitec.psmsystem.controlador.VentanaEmpenoControlador;
@@ -182,19 +182,19 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 		toolBar.setFloatable(false);//fixar el toolbar
 		contentPane.add(toolBar);
 
-		BotonIcono btncnEmpeo = new BotonIcono();
+		BotonIconoPrincipal btncnEmpeo = new BotonIconoPrincipal();
 		btncnEmpeo.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/empe\u00F1o.png")));
 		btncnEmpeo.setEnabled(false);
 		btncnEmpeo.setText("Empe\u00F1o");
 		toolBar.add(btncnEmpeo);
 
-		BotonIcono btncnCobranza = new BotonIcono();
+		BotonIconoPrincipal btncnCobranza = new BotonIconoPrincipal();
 		btncnCobranza.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/cobranza.png")));
 		btncnCobranza.setEnabled(false);
 		btncnCobranza.setText("Cobranza");
 		toolBar.add(btncnCobranza);
 
-		BotonIcono btncnCliente = new BotonIcono();
+		BotonIconoPrincipal btncnCliente = new BotonIconoPrincipal();
 		btncnCliente.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/cliente.png")));
 		btncnCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -204,7 +204,7 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 		btncnCliente.setText("Cliente");
 		toolBar.add(btncnCliente);
 
-		BotonIcono btncnSalir = new BotonIcono();
+		BotonIconoPrincipal btncnSalir = new BotonIconoPrincipal();
 		btncnSalir.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/salir.png")));
 		btncnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

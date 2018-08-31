@@ -25,7 +25,7 @@ public class Configuracion {
 	private String email;
 	
 	@Column(name="conf_interes")
-	public String interes;
+	public double interes;
 
 
 	public Integer getId() {
@@ -64,12 +64,13 @@ public class Configuracion {
 	public void setRuc(String ruc) {
 		this.ruc = ruc;
 	}
-	public String getInteres() {
+	public double getInteres() {
 		return interes;
 	}
-	public void setInteres(String interes) {
+	public void setInteres(double interes) {
 		this.interes = interes;
 	}
+
 
 
 

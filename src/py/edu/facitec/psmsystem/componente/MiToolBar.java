@@ -9,11 +9,11 @@ import javax.swing.JToolBar;
 import py.edu.facitec.psmsystem.interfaz.AccionesABM;
 
 public class MiToolBar extends JToolBar implements ActionListener {
-	private BotonIcono btncnNuevo;
-	private BotonIcono btncnModificar;
-	public BotonIcono btncnEliminar;
-	private BotonIcono btncnGuardar;
-	private BotonIcono btncnCancelar;
+	private BotonIconoVentana btncnNuevo;
+	private BotonIconoVentana btncnModificar;
+	public BotonIconoVentana btncnEliminar;
+	private BotonIconoVentana btncnGuardar;
+	private BotonIconoVentana btncnCancelar;
 
 	private AccionesABM acciones;
 
@@ -24,30 +24,30 @@ public class MiToolBar extends JToolBar implements ActionListener {
 	public MiToolBar() {
 		setFloatable(false);
 
-		btncnNuevo = new BotonIcono();
+		btncnNuevo = new BotonIconoVentana();
 		btncnNuevo.setIcon(new ImageIcon(MiToolBar.class.getResource("/img/nuevo.png")));
 		btncnNuevo.setText("Nuevo");
 		add(btncnNuevo);
 
-		btncnModificar = new BotonIcono();
+		btncnModificar = new BotonIconoVentana();
 		btncnModificar.setIcon(new ImageIcon(MiToolBar.class.getResource("/img/modificar.png")));
 		btncnModificar.setEnabled(false);
 		btncnModificar.setText("Modificar");
 		add(btncnModificar);
 
-		btncnEliminar = new BotonIcono();
+		btncnEliminar = new BotonIconoVentana();
 		btncnEliminar.setIcon(new ImageIcon(MiToolBar.class.getResource("/img/eliminar.png")));
 		btncnEliminar.setEnabled(false);
 		btncnEliminar.setText("Eliminar");
 		add(btncnEliminar);
 
-		btncnGuardar = new BotonIcono();
+		btncnGuardar = new BotonIconoVentana();
 		btncnGuardar.setIcon(new ImageIcon(MiToolBar.class.getResource("/img/guardar.png")));
 		btncnGuardar.setEnabled(false);
 		btncnGuardar.setText("Guardar");
 		add(btncnGuardar);
 
-		btncnCancelar = new BotonIcono();
+		btncnCancelar = new BotonIconoVentana();
 		btncnCancelar.setIcon(new ImageIcon(MiToolBar.class.getResource("/img/cancelar.png")));
 		btncnCancelar.setEnabled(false);
 		btncnCancelar.setText("Cancelar");

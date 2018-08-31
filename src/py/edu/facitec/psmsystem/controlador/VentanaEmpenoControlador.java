@@ -13,8 +13,10 @@ import javax.swing.JOptionPane;
 
 import py.edu.facitec.psmsystem.buscador.BuscadorCliente;
 import py.edu.facitec.psmsystem.dao.EmpenoDao;
+import py.edu.facitec.psmsystem.dao.ProductoDao;
 import py.edu.facitec.psmsystem.entidad.Cliente;
 import py.edu.facitec.psmsystem.entidad.Empeno;
+import py.edu.facitec.psmsystem.entidad.Producto;
 import py.edu.facitec.psmsystem.interfaz.AccionesABM;
 import py.edu.facitec.psmsystem.interfaz.InterfazBuscadorCliente;
 import py.edu.facitec.psmsystem.tabla.TablaEmpeno;
@@ -94,10 +96,10 @@ public class VentanaEmpenoControlador implements AccionesABM, KeyListener, Actio
 
 	private void estadoInicialCampos(boolean b) {
 		this.vEmpeno.gettfFechaRegistro().setEnabled(b);
-		this.vEmpeno.gettfFechaVencimiento().setEnabled(b);
+//		this.vEmpeno.gettfFechaVencimiento().setEnabled(b);
 		this.vEmpeno.gettfCliente().setEnabled(b);
 		this.vEmpeno.getbtnBuscarCliente().setEnabled(b);
-		this.vEmpeno.gettfValorTotal().setEnabled(b);
+//		this.vEmpeno.gettfValorTotal().setEnabled(b);
 		this.vEmpeno.gettfCuota().setEnabled(b);
 		this.vEmpeno.gettfObs().setEnabled(b);
 		this.vEmpeno.gettfDescripcion().setEnabled(b);
@@ -109,8 +111,8 @@ public class VentanaEmpenoControlador implements AccionesABM, KeyListener, Actio
 
 	private void estadoInicialCampos2(boolean b) {
 		this.vEmpeno.gettfFechaRegistro().setEditable(b);
-		this.vEmpeno.gettfFechaVencimiento().setEditable(b);
-		this.vEmpeno.gettfValorTotal().setEditable(b);
+//		this.vEmpeno.gettfFechaVencimiento().setEditable(b);
+//		this.vEmpeno.gettfValorTotal().setEditable(b);
 		this.vEmpeno.gettfCuota().setEditable(b);
 		this.vEmpeno.gettfObs().setEditable(b);
 		this.vEmpeno.gettfDescripcion().setEditable(b);
@@ -202,16 +204,13 @@ public class VentanaEmpenoControlador implements AccionesABM, KeyListener, Actio
 		if (accion.equals("NUEVO")) {
 			empeno = new Empeno();
 		}
-
-
-
-
-
-
-
-
-
-
+		empeno.setFechaDia(FechaUtil.convertirStringADateUtil(vEmpeno.gettfFechaRegistro().getText()));
+		empeno.setFechaVencimiento(FechaUtil.convertirStringADateUtil(vEmpeno.gettfFechaVencimiento().getText()));
+		empeno.setValorTotal(vEmpeno.gettfValorTotal().getValue());
+		empeno.setEstado(vEmpeno.getcbEstado().getSelectedIndex());
+		empeno.setObservacion(vEmpeno.gettfObs().getText());
+		empeno.setCliente(cliente);
+		
 		try {
 			if(accion.equals("NUEVO")){
 				dao.insertar(empeno);
@@ -229,10 +228,37 @@ public class VentanaEmpenoControlador implements AccionesABM, KeyListener, Actio
 			dao.rollback();
 			JOptionPane.showMessageDialog(null, "Se produjo un error al guardar", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
+		guardarProducto();
+		guardarDeuda();
 		estadoInicialCampos(false);
 		estadoInicialCampos2(false);
 		this.vEmpeno.getcbEstado().setEnabled(false);
 		this.vEmpeno.getTable().setEnabled(true);
+	}
+	
+	private void guardarProducto() {
+		ProductoDao productoDao = new ProductoDao();
+		Producto producto = new Producto();
+		producto.setDescripcion(vEmpeno.gettfDescripcion().getText());
+		producto.setDetalle(vEmpeno.gettfDetalle().getText());
+		producto.setEstado(0);
+
+		producto.setPrecioCompra(Double.parseDouble(vEmpeno.gettfValorEmpeno().getText()));
+		producto.setPrecioVenta(Double.parseDouble(vEmpeno.gettfValorTotal().getText()));
+		
+		producto.setEmpeno(empeno);
+		
+		try {
+			productoDao.insertar(producto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		productoDao.commit();
+
+	}
+	
+	private void guardarDeuda() {
+
 	}
 
 	@Override
@@ -290,6 +316,11 @@ public class VentanaEmpenoControlador implements AccionesABM, KeyListener, Actio
 	}
 
 //----------------------------------------------------------------------------------------------------------
+	
+	public void cargarVencimiento() {
+		vEmpeno.gettfFechaVencimiento().setValue(FechaUtil.convertirDateUtilAString(FechaUtil.sumarMes(FechaUtil.convertirStringADateUtil(vEmpeno.gettfFechaRegistro().getText()), Integer.parseInt(vEmpeno.gettfCuota().getText()) )));
+	}
+	
 
 	@Override
 	public void keyPressed(KeyEvent e) {

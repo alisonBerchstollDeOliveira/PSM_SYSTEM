@@ -38,7 +38,7 @@ public class TablaEmpeno extends AbstractTableModel {
 		case 0:
 			return lista.get(rowIndex).getNumero();
 		case 1:
-			return lista.get(rowIndex).getCliente();
+			return lista.get(rowIndex).getCliente().getNombre();
 		case 2:
 			return lista.get(rowIndex).getValorTotal();
 		case 3:
