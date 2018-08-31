@@ -45,7 +45,7 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 
 	private PanelFondo contentPane;
 	public static JLabel lblNombre;
-	public static JLabel lblDireccion;
+	public static JLabel lblRuc;
 	public static JLabel lblTelefono;
 	public static JLabel lblEmail;
 	private List<Configuracion> configuracion;
@@ -149,7 +149,7 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 				if (respuesta==JOptionPane.YES_OPTION) {
 					inicializarBaseDeDatos();
 					JOptionPane.showMessageDialog(null, "Base de datos restablecida\nDebe reiniciar el sistema para aplicar los cambios");
-					System.exit(0);
+//					System.exit(0);
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Operación cancelada");
@@ -183,8 +183,12 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 		contentPane.add(toolBar);
 
 		BotonIconoPrincipal btncnEmpeo = new BotonIconoPrincipal();
+		btncnEmpeo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirFormularioEmpeno();
+			}
+		});
 		btncnEmpeo.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/img/empe\u00F1o.png")));
-		btncnEmpeo.setEnabled(false);
 		btncnEmpeo.setText("Empe\u00F1o");
 		toolBar.add(btncnEmpeo);
 
@@ -239,19 +243,19 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 		gbc_lblNombre.gridy = 2;
 		jPanelConfig.add(lblNombre, gbc_lblNombre);
 
-		lblDireccion = new JLabel("");
-		lblDireccion.setHorizontalTextPosition(SwingConstants.LEFT);
-		lblDireccion.setHorizontalAlignment(SwingConstants.LEFT);
-		lblDireccion.setVerticalTextPosition(SwingConstants.BOTTOM);
-		lblDireccion.setForeground(Color.WHITE);
-		lblDireccion.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 28));
+		lblRuc = new JLabel("");
+		lblRuc.setHorizontalTextPosition(SwingConstants.LEFT);
+		lblRuc.setHorizontalAlignment(SwingConstants.LEFT);
+		lblRuc.setVerticalTextPosition(SwingConstants.BOTTOM);
+		lblRuc.setForeground(Color.WHITE);
+		lblRuc.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 28));
 		GridBagConstraints gbc_lblDireccion = new GridBagConstraints();
 		gbc_lblDireccion.anchor = GridBagConstraints.WEST;
 		gbc_lblDireccion.gridheight = 2;
 		gbc_lblDireccion.insets = new Insets(0, 0, 5, 0);
 		gbc_lblDireccion.gridx = 1;
 		gbc_lblDireccion.gridy = 4;
-		jPanelConfig.add(lblDireccion, gbc_lblDireccion);
+		jPanelConfig.add(lblRuc, gbc_lblDireccion);
 
 		lblTelefono = new JLabel("");
 		lblTelefono.setForeground(Color.WHITE);
@@ -323,7 +327,7 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 		configuracion = configuracionDao.recuperarTodo();
 		if (configuracion.size()==0) return;
 		lblNombre.setText(configuracion.get(0).getNombre());
-		lblDireccion.setText(configuracion.get(0).getDireccion());
+		lblRuc.setText(configuracion.get(0).getDireccion());
 		lblTelefono.setText(configuracion.get(0).getTelefono());
 		lblEmail.setText(configuracion.get(0).getEmail());
 	}

@@ -259,6 +259,16 @@ public class VentanaEmpeno extends VentanaGenerica{
 		getContentPane().add(lblValorTotal);
 
 		tfDescripcion = new JTextField();
+		tfDescripcion.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (c == e.VK_ENTER) {
+					tfDetalle.requestFocus();
+					tfDetalle.selectAll();
+				}
+			}
+		});
 		tfDescripcion.setEditable(false);
 		tfDescripcion.setEnabled(false);
 		tfDescripcion.setBounds(118, 512, 366, 20);

@@ -52,7 +52,7 @@ public class Loading extends JFrame {
 
 		lblCargando = new JLabel("Cargando...");
 		lblCargando.setBounds(10, 251, 248, 49);
-		lblCargando.setFont(new Font("Serif", Font.PLAIN, 38));
+		lblCargando.setFont(new Font("Serif", Font.BOLD, 38));
 		lblCargando.setForeground(Color.BLACK);
 		contentPane.add(lblCargando);
 
@@ -61,7 +61,7 @@ public class Loading extends JFrame {
 		lblVersion.setBounds(345, 280, 95, 20);
 		lblVersion.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		lblVersion.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblVersion.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblVersion.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblVersion.setForeground(Color.BLACK);
 		contentPane.add(lblVersion);
 		abrir.start();
@@ -77,7 +77,7 @@ public class Loading extends JFrame {
 
 	public void abrirMenu(){
 		Factory.setUp();
-		//		conectarReporte();
+		//conectarReporte();
 		VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
 		ventanaPrincipal.setVisible(true);
 		dispose();

@@ -1,6 +1,7 @@
 package py.edu.facitec.psmsystem.abm;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
@@ -21,8 +23,6 @@ import py.com.cs.xnumberfield.component.NumberTextField;
 import py.edu.facitec.psmsystem.app.VentanaPrincipal;
 import py.edu.facitec.psmsystem.dao.ConfiguracionDao;
 import py.edu.facitec.psmsystem.entidad.Configuracion;
-import java.awt.Font;
-import javax.swing.SwingConstants;
 
 public class VentanaConfiguracion extends JDialog {
 	private JTextField tfNombre;
@@ -70,21 +70,31 @@ public class VentanaConfiguracion extends JDialog {
 		lblNombre.setBounds(10, 14, 165, 20);
 		getContentPane().add(lblNombre);
 
-		JLabel lblEmail = new JLabel("Email                        :");
-		lblEmail.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
-		lblEmail.setBounds(10, 116, 165, 20);
-		getContentPane().add(lblEmail);
+		JLabel lblRuc = new JLabel("R.U.C.                      :");
+		lblRuc.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
+		lblRuc.setBounds(10, 48, 165, 20);
+		getContentPane().add(lblRuc);
 
 		JLabel lblTelefono = new JLabel("Tel\u00E9fono                   :");
 		lblTelefono.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
 		lblTelefono.setBounds(10, 82, 165, 20);
 		getContentPane().add(lblTelefono);
 
-		JLabel lblRuc = new JLabel("R.U.C.                      :");
-		lblRuc.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
-		lblRuc.setBounds(10, 48, 165, 20);
-		getContentPane().add(lblRuc);
-
+		JLabel lblEmail = new JLabel("Email                        :");
+		lblEmail.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
+		lblEmail.setBounds(10, 116, 165, 20);
+		getContentPane().add(lblEmail);
+		
+		JLabel lblTazaInteres = new JLabel("Taza de  inter\u00E9s         :");
+		lblTazaInteres.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTazaInteres.setBounds(10, 150, 165, 20);
+		getContentPane().add(lblTazaInteres);
+		
+		JLabel label = new JLabel("%");
+		label.setBounds(226, 155, 46, 14);
+		getContentPane().add(label);
+		datosActuales();
+		
 		tfNombre = new JTextField();
 		tfNombre.addKeyListener(new KeyAdapter() {
 			@Override
@@ -96,11 +106,6 @@ public class VentanaConfiguracion extends JDialog {
 				}
 			}
 		});
-		
-		JLabel lblTazaInteres = new JLabel("Taza de  inter\u00E9s         :");
-		lblTazaInteres.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTazaInteres.setBounds(10, 150, 165, 20);
-		getContentPane().add(lblTazaInteres);
 		tfNombre.setBounds(179, 14, 181, 20);
 		getContentPane().add(tfNombre);
 		tfNombre.setColumns(10);
@@ -150,24 +155,7 @@ public class VentanaConfiguracion extends JDialog {
 		tfEmail.setBounds(179, 116, 181, 20);
 		getContentPane().add(tfEmail);
 		tfEmail.setColumns(10);
-
-		btnActualizar = new JButton("Actualizar");
-		btnActualizar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnActualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int respuesta = JOptionPane.showConfirmDialog(null, 
-						"Estas seguro que deseas actualizar los datos de la empresa?",
-						"Atención!",
-						JOptionPane.YES_NO_OPTION);
-				if (respuesta==JOptionPane.YES_OPTION) {
-					guardar();
-				}
-			}
-		});
-			btnActualizar.setBounds(24, 194, 97, 34);
-		getContentPane().add(btnActualizar);
 		
-	
 		tfInteres = new NumberTextField();
 		tfInteres.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfInteres.setBounds(179, 150, 44, 20);
@@ -182,6 +170,34 @@ public class VentanaConfiguracion extends JDialog {
 		});
 		getContentPane().add(tfInteres);
 		tfInteres.setColumns(10);
+		
+	
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int respuesta = JOptionPane.showConfirmDialog(null, 
+						"Estas seguro que deseas actualizar los datos de la empresa?",
+						"Atención!",
+						JOptionPane.YES_NO_OPTION);
+				if (respuesta==JOptionPane.YES_OPTION) {
+					guardar();
+				}
+			}
+		});
+		btnActualizar.setBounds(24, 194, 97, 34);
+		getContentPane().add(btnActualizar);
+		
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vaciarFormulario();
+			}
+		});
+			btnBorrar.setBounds(145, 194, 97, 34);
+		getContentPane().add(btnBorrar);
+	
 
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -193,23 +209,11 @@ public class VentanaConfiguracion extends JDialog {
 		btnCancelar.setBounds(266, 194, 97, 34);
 		getContentPane().add(btnCancelar);
 
-		btnBorrar = new JButton("Borrar");
-		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnBorrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				vaciarFormulario();
-			}
-		});
-		btnBorrar.setBounds(145, 194, 97, 34);
-		getContentPane().add(btnBorrar);
-		
-		JLabel label = new JLabel("%");
-		label.setBounds(226, 155, 46, 14);
-		getContentPane().add(label);
-		datosActuales();
+	
+	
 	}
 
-//-------------------------FIN DEL CONSTRUCTOR--------------------------------
+	//-------------------------FIN DEL CONSTRUCTOR--------------------------------
 
 	private void cargarDatos() {
 		configuracion = new Configuracion();
@@ -240,7 +244,7 @@ public class VentanaConfiguracion extends JDialog {
 		dao = new ConfiguracionDao();
 		configuracion = dao.recuperarPorId(1);
 		VentanaPrincipal.lblNombre.setText(configuracion.getNombre());
-		VentanaPrincipal.lblDireccion.setText(configuracion.getDireccion());
+		VentanaPrincipal.lblRuc.setText(configuracion.getDireccion());
 		VentanaPrincipal.lblTelefono.setText(configuracion.getTelefono());
 		VentanaPrincipal.lblEmail.setText(configuracion.getEmail());
 	}
@@ -263,16 +267,21 @@ public class VentanaConfiguracion extends JDialog {
 		tfEmail.setText("");
 	}
 
-//-----------------------------------INICIALIZAR BASE DE DATOS-------------------------------------
+	//-----------------------------------INICIALIZAR BASE DE DATOS-------------------------------------
 
 	public void inicializarConfiguracion() {
 		String tabla = "tb_configuracion";
 		dao.eliminarTodos(tabla);
+//		VentanaPrincipal.lblNombre.setText("");
+//		VentanaPrincipal.lblRuc.setText("");
+//		VentanaPrincipal.lblTelefono.setText("");
+//		VentanaPrincipal.lblEmail.setText("");
 		try {
 			dao.commit();
 		} catch (Exception e) {
 			dao.rollback();
 		}
+
 	}
 
 
@@ -322,5 +331,5 @@ public class VentanaConfiguracion extends JDialog {
 		return btnBorrar;
 	}
 
-	
+
 }
