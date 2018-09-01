@@ -27,7 +27,8 @@ public class Configuracion {
 	@Column(name="conf_interes")
 	public double interes;
 
-
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -40,11 +41,11 @@ public class Configuracion {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getDireccion() {
+	public String getRuc() {
 		return ruc;
 	}
-	public void setDireccion(String direccion) {
-		this.ruc = direccion;
+	public void setRuc(String ruc) {
+		this.ruc = ruc;
 	}
 	public String getTelefono() {
 		return telefono;
@@ -58,12 +59,6 @@ public class Configuracion {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getRuc() {
-		return ruc;
-	}
-	public void setRuc(String ruc) {
-		this.ruc = ruc;
-	}
 	public double getInteres() {
 		return interes;
 	}
@@ -72,6 +67,7 @@ public class Configuracion {
 	}
 
 
+	
 
 
 }

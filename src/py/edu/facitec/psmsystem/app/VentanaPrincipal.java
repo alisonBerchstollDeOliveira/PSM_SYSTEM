@@ -148,8 +148,7 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 				int respuesta = JOptionPane.showConfirmDialog(null, "Desea restablecer datos?\nSerán eliminado permanentemente todos los datos almacenados", "Atención!!", JOptionPane.YES_NO_OPTION);
 				if (respuesta==JOptionPane.YES_OPTION) {
 					inicializarBaseDeDatos();
-					JOptionPane.showMessageDialog(null, "Base de datos restablecida\nDebe reiniciar el sistema para aplicar los cambios");
-//					System.exit(0);
+					JOptionPane.showMessageDialog(null, "Base de datos restablecida");
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Operación cancelada");
@@ -249,13 +248,13 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 		lblRuc.setVerticalTextPosition(SwingConstants.BOTTOM);
 		lblRuc.setForeground(Color.WHITE);
 		lblRuc.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 28));
-		GridBagConstraints gbc_lblDireccion = new GridBagConstraints();
-		gbc_lblDireccion.anchor = GridBagConstraints.WEST;
-		gbc_lblDireccion.gridheight = 2;
-		gbc_lblDireccion.insets = new Insets(0, 0, 5, 0);
-		gbc_lblDireccion.gridx = 1;
-		gbc_lblDireccion.gridy = 4;
-		jPanelConfig.add(lblRuc, gbc_lblDireccion);
+		GridBagConstraints gbc_lblRuc = new GridBagConstraints();
+		gbc_lblRuc.anchor = GridBagConstraints.WEST;
+		gbc_lblRuc.gridheight = 2;
+		gbc_lblRuc.insets = new Insets(0, 0, 5, 0);
+		gbc_lblRuc.gridx = 1;
+		gbc_lblRuc.gridy = 4;
+		jPanelConfig.add(lblRuc, gbc_lblRuc);
 
 		lblTelefono = new JLabel("");
 		lblTelefono.setForeground(Color.WHITE);
@@ -327,7 +326,7 @@ public class VentanaPrincipal extends JFrame implements KeyEventDispatcher{
 		configuracion = configuracionDao.recuperarTodo();
 		if (configuracion.size()==0) return;
 		lblNombre.setText(configuracion.get(0).getNombre());
-		lblRuc.setText(configuracion.get(0).getDireccion());
+		lblRuc.setText(configuracion.get(0).getRuc());
 		lblTelefono.setText(configuracion.get(0).getTelefono());
 		lblEmail.setText(configuracion.get(0).getEmail());
 	}

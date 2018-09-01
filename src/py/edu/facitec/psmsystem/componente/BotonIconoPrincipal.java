@@ -19,7 +19,7 @@ public class BotonIconoPrincipal extends JButton{
 		setMaximumSize(new Dimension(100, 100));
 		setFont(new Font("Tahoma", Font.BOLD, 16));
 		setForeground(Color.WHITE);
-		setBackground(Color.WHITE);
+		setBackground(Color.BLACK);
 	}
 	public void setText(String text) {
 		setIcono(text);

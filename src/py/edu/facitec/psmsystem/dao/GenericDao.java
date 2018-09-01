@@ -83,6 +83,7 @@ public class GenericDao <T>{
 
 	public void rollback() {
 		getSession().getTransaction().rollback();
+		getSession().clear();
 	}
 	
 	public void cerrar(){

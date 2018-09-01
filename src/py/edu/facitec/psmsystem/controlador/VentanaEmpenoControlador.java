@@ -218,22 +218,22 @@ public class VentanaEmpenoControlador implements AccionesABM, KeyListener, Actio
 				dao.modificar(empeno);
 			}
 			dao.commit();
+			
+			guardarProducto();
+			guardarDeuda();
+			
 			vaciarFormulario();
 			this.vEmpeno.getMiToolBar().estadoInicialToolBar(true,2);
 			estadoInicialCampos(false);
 			estadoInicialCampos2(false);
+			this.vEmpeno.getcbEstado().setEnabled(false);
+			this.vEmpeno.getTable().setEnabled(true);
 			recuperarTodo();
 
 		} catch (Exception e) {
 			dao.rollback();
 			JOptionPane.showMessageDialog(null, "Se produjo un error al guardar", "ERROR", JOptionPane.ERROR_MESSAGE);
 		}
-		guardarProducto();
-		guardarDeuda();
-		estadoInicialCampos(false);
-		estadoInicialCampos2(false);
-		this.vEmpeno.getcbEstado().setEnabled(false);
-		this.vEmpeno.getTable().setEnabled(true);
 	}
 	
 	private void guardarProducto() {
@@ -250,10 +250,12 @@ public class VentanaEmpenoControlador implements AccionesABM, KeyListener, Actio
 		
 		try {
 			productoDao.insertar(producto);
+
+			productoDao.commit();
 		} catch (Exception e) {
+			productoDao.rollback();
 			e.printStackTrace();
 		}
-		productoDao.commit();
 
 	}
 	

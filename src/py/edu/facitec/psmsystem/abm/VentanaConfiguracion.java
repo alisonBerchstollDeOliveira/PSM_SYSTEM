@@ -213,7 +213,7 @@ public class VentanaConfiguracion extends JDialog {
 	
 	}
 
-	//-------------------------FIN DEL CONSTRUCTOR--------------------------------
+//-------------------------FIN DEL CONSTRUCTOR--------------------------------
 
 	private void cargarDatos() {
 		configuracion = new Configuracion();
@@ -222,7 +222,7 @@ public class VentanaConfiguracion extends JDialog {
 		configuracion.setRuc(tfRuc.getText());
 		configuracion.setTelefono(tfTelefono.getText());
 		configuracion.setEmail(tfEmail.getText());
-		configuracion.setInteres(Double.parseDouble(tfInteres.getText()));
+//		configuracion.setInteres(Double.parseDouble(tfInteres.getText()));
 	}
 
 	private void guardar(){
@@ -235,7 +235,6 @@ public class VentanaConfiguracion extends JDialog {
 			e.printStackTrace();
 			dao.rollback();
 		}
-
 		actualizarPantalla();
 		dispose();
 	}
@@ -244,7 +243,7 @@ public class VentanaConfiguracion extends JDialog {
 		dao = new ConfiguracionDao();
 		configuracion = dao.recuperarPorId(1);
 		VentanaPrincipal.lblNombre.setText(configuracion.getNombre());
-		VentanaPrincipal.lblRuc.setText(configuracion.getDireccion());
+		VentanaPrincipal.lblRuc.setText(configuracion.getRuc());
 		VentanaPrincipal.lblTelefono.setText(configuracion.getTelefono());
 		VentanaPrincipal.lblEmail.setText(configuracion.getEmail());
 	}
@@ -254,9 +253,10 @@ public class VentanaConfiguracion extends JDialog {
 		configuraciones = dao.recuperarTodo();
 		if (configuraciones.size()==0) return;
 		tfNombre.setText(configuraciones.get(0).getNombre());
-		tfRuc.setText(configuraciones.get(0).getDireccion());
+		tfRuc.setText(configuraciones.get(0).getRuc());
 		tfTelefono.setText(configuraciones.get(0).getTelefono());
 		tfEmail.setText(configuraciones.get(0).getEmail());
+//		tfInteres.setText(configuraciones.get(0).getInteres()+"");
 	}
 
 	private void vaciarFormulario() {
@@ -265,22 +265,24 @@ public class VentanaConfiguracion extends JDialog {
 		tfRuc.setText("");
 		tfTelefono.setText("");
 		tfEmail.setText("");
+//		tfInteres.setText("");
 	}
 
-	//-----------------------------------INICIALIZAR BASE DE DATOS-------------------------------------
+//-----------------------------------INICIALIZAR BASE DE DATOS-------------------------------------
 
 	public void inicializarConfiguracion() {
 		String tabla = "tb_configuracion";
 		dao.eliminarTodos(tabla);
-//		VentanaPrincipal.lblNombre.setText("");
-//		VentanaPrincipal.lblRuc.setText("");
-//		VentanaPrincipal.lblTelefono.setText("");
-//		VentanaPrincipal.lblEmail.setText("");
 		try {
 			dao.commit();
 		} catch (Exception e) {
 			dao.rollback();
 		}
+		
+		VentanaPrincipal.lblNombre.setText("");
+		VentanaPrincipal.lblRuc.setText("");
+		VentanaPrincipal.lblTelefono.setText("");
+		VentanaPrincipal.lblEmail.setText("");
 
 	}
 
@@ -288,7 +290,7 @@ public class VentanaConfiguracion extends JDialog {
 	public JTextField gettfNombre() {
 		return tfNombre;
 	}
-	public JTextField gettfDireccion() {
+	public JTextField gettfRuc() {
 		return tfRuc;
 	}
 	public JTextField gettfTelefono() {

@@ -3,6 +3,7 @@ package py.edu.facitec.psmsystem.entidad;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,7 +43,7 @@ public class Empeno {
 	@JoinColumn(name = "Clienteid", referencedColumnName = "id")
 	private Cliente cliente;
 
-	@OneToMany(mappedBy = "empeno")
+	@OneToMany(mappedBy = "empeno",cascade=CascadeType.ALL)
 	private List<DeudaCliente> deudaClientes;
 
 	@OneToOne
