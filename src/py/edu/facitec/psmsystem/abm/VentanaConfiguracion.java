@@ -57,7 +57,7 @@ public class VentanaConfiguracion extends JDialog {
 	}
 
 	public VentanaConfiguracion() {
-		setTitle("Configuración");
+		setTitle("ConfiguraciÃ³n");
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaConfiguracion.class.getResource("/img/icono.png")));
 		setBounds(100, 100, 396, 276);
@@ -93,7 +93,6 @@ public class VentanaConfiguracion extends JDialog {
 		JLabel label = new JLabel("%");
 		label.setBounds(226, 155, 46, 14);
 		getContentPane().add(label);
-		datosActuales();
 		
 		tfNombre = new JTextField();
 		tfNombre.addKeyListener(new KeyAdapter() {
@@ -178,7 +177,7 @@ public class VentanaConfiguracion extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				int respuesta = JOptionPane.showConfirmDialog(null, 
 						"Estas seguro que deseas actualizar los datos de la empresa?",
-						"Atención!",
+						"AtenciÃ³n!",
 						JOptionPane.YES_NO_OPTION);
 				if (respuesta==JOptionPane.YES_OPTION) {
 					guardar();
@@ -211,6 +210,7 @@ public class VentanaConfiguracion extends JDialog {
 
 	
 	
+		datosActuales();
 	}
 
 //-------------------------FIN DEL CONSTRUCTOR--------------------------------
